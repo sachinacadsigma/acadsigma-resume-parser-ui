@@ -1,0 +1,39 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+* {
+  font-family: 'Inter', sans-serif;
+  scroll-behavior: smooth;
+}
+
+.bg-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #0000003b;
+}
+
+.bg-custom {
+  background-image: linear-gradient(
+    to top,
+    #f3e7e9 0%,
+    #e3eeff 99%,
+    #e3eeff 100%
+  );
+  border-bottom: 1px solid transparent;
+
+  /* color: #010207; */
+}
+
+@theme {
+  /* Primary */
+  --color-primary: #0a081b;
+  --color-primary-hover: #010207; /* deeper shade */
+
+  /* Secondary */
+  --color-secondary: #11b080;
+  --color-secondary-hover: #0b7354; /* deeper shade */
+}
