@@ -3,7 +3,7 @@ import { API_URL, GOOGLE_AUTH_URL } from '../utils/constants';
 import { useAuth } from '../redux/hooks/useAuth';
 import { useUser } from '../redux/hooks/useUser';
 import Logo from './Logo';
-import { Files, House, LogIn, LogOut, Settings, User } from 'lucide-react';
+import { Filel House, LogIn, LogOut, Settings, User } from 'lucide-react';
 
 const navItemClasses =
   'text-lg flex items-center gap-1 hover:text-secondary transition-colors cursor-pointer';
