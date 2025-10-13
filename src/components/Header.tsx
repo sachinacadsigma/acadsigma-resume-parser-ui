@@ -63,7 +63,7 @@ const Header = () => {
               <NavItem to='/upload-jd' icon={House} label='Home' />
               {isAdmin && (
                 <>
-                  <NavItem to='/files' icon={Files} label='Files' />
+                  {/*<NavItem to='/files' icon={Files} label='Files' /> */}
                   <NavItem to='/settings' icon={Settings} label='Settings' />
                   {/* <NavItem to='/chats' icon={MessageCircle} label='Chats' /> */}
                 </>
