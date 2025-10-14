@@ -28,7 +28,7 @@ function App() {
         const userRes = await apiClient.get('/auth/me');
         if (userRes.status === 200) {
           console.log('user data response: ', userRes);
-          storeUser({ ...userRes.data, role: 'user' });
+          storeUser({ ...userRes.data, role: userRes.data.role || 'user' });
         }
       } catch (error) {
         console.log('Error || getUserData: ', error);

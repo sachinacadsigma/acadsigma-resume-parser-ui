@@ -111,19 +111,6 @@ export default function CandidateModal({
             <GitHubSummary data={data.github_summary} />
           </div>
         )}
-
-        {/* Resume Link */}
-        {data.resume_file_name && (
-          <div className='text-right'>
-            <a
-              href={data.resume_file_name}
-              target='_blank'
-              className='text-blue-600 hover:text-blue-700 font-medium'
-            >
-              📄 Download Resume
-            </a>
-          </div>
-        )}
       </div>
     </div>
   );

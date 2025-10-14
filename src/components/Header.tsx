@@ -24,10 +24,10 @@ const NavItem = ({
 
 const Header = () => {
   const { token, isAuthenticated, logout } = useAuth();
-  const { name, removeUser } = useUser();
+  const { name, removeUser, role } = useUser();
   const navigate = useNavigate();
 
-  const isAdmin = Boolean(name);
+  const isAdmin = role === 'admin';
 
   const handleLogin = () => {
     window.location.href = GOOGLE_AUTH_URL ?? `${API_URL}/auth/google`;
