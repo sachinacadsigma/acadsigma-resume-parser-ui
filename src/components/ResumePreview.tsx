@@ -1,9 +1,10 @@
 import { X } from 'lucide-react';
 import { useMatch } from '../redux/hooks/useMatch';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
 const ResumePreview = () => {
   const { activeResume, handleClosePreview } = useMatch();
+  console.log(activeResume);
 
   // Detect file type
   const fileType = useMemo(() => {
@@ -27,9 +28,10 @@ const ResumePreview = () => {
   const renderPreview = () => {
     switch (fileType) {
       case 'pdf':
+      case 'txt':
         return (
           <iframe
-            className='w-full h-full rounded-md'
+            className='w-full bg-white h-full rounded-md'
             src={activeResume}
             frameBorder='0'
             title='PDF Preview'
@@ -47,14 +49,6 @@ const ResumePreview = () => {
             frameBorder='0'
             title='DOCX Preview'
           />
-        );
-
-      case 'txt':
-        // Fetch and display as plain text
-        return (
-          <div className='p-4 overflow-auto h-full font-mono text-sm text-gray-700 whitespace-pre-wrap bg-white rounded-md'>
-            <TextFileViewer url={activeResume} />
-          </div>
         );
 
       default:
@@ -85,24 +79,6 @@ const ResumePreview = () => {
       </div>
     </div>
   );
-};
-
-// Component for loading and displaying text files
-const TextFileViewer = ({ url }: { url: string }) => {
-  const [content, setContent] = useState<string>('Loading...');
-
-  useEffect(() => {
-    const controller = new AbortController();
-
-    fetch(url, { signal: controller.signal })
-      .then((res) => res.text())
-      .then(setContent)
-      .catch(() => setContent('Unable to load text content.'));
-
-    return () => controller.abort();
-  }, [url]);
-
-  return <pre>{content}</pre>;
 };
 
 export default ResumePreview;
