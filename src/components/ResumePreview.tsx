@@ -1,8 +1,19 @@
 import { X } from 'lucide-react';
 import { useMatch } from '../redux/hooks/useMatch';
+import { useEffect, useMemo, useState } from 'react';
 
 const ResumePreview = () => {
   const { activeResume, handleClosePreview } = useMatch();
+
+  // Detect file type
+  const fileType = useMemo(() => {
+    if (!activeResume) return null;
+    const lower = activeResume.toLowerCase();
+    if (lower.endsWith('.pdf')) return 'pdf';
+    if (lower.endsWith('.docx') || lower.endsWith('.doc')) return 'docx';
+    if (lower.endsWith('.txt')) return 'txt';
+    return 'unknown';
+  }, [activeResume]);
 
   if (!activeResume) {
     return (
@@ -11,6 +22,49 @@ const ResumePreview = () => {
       </div>
     );
   }
+
+  // Render logic
+  const renderPreview = () => {
+    switch (fileType) {
+      case 'pdf':
+        return (
+          <iframe
+            className='w-full h-full rounded-md'
+            src={activeResume}
+            frameBorder='0'
+            title='PDF Preview'
+          />
+        );
+
+      case 'docx':
+        // Use Microsoft Office online viewer
+        return (
+          <iframe
+            className='w-full h-full rounded-md'
+            src={`https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(
+              activeResume
+            )}`}
+            frameBorder='0'
+            title='DOCX Preview'
+          />
+        );
+
+      case 'txt':
+        // Fetch and display as plain text
+        return (
+          <div className='p-4 overflow-auto h-full font-mono text-sm text-gray-700 whitespace-pre-wrap bg-white rounded-md'>
+            <TextFileViewer url={activeResume} />
+          </div>
+        );
+
+      default:
+        return (
+          <div className='flex items-center justify-center h-full text-gray-400'>
+            Preview not available for this file type.
+          </div>
+        );
+    }
+  };
 
   return (
     <div className='border border-gray-200 p-4 rounded-lg bg-white shadow-sm flex flex-col h-[90vh]'>
@@ -25,22 +79,30 @@ const ResumePreview = () => {
         </button>
       </div>
 
-      {/* Iframe Container */}
+      {/* Body */}
       <div className='flex-1 relative overflow-hidden rounded-md border border-gray-200 shadow-inner bg-gray-50'>
-        <iframe
-          className='w-full h-full rounded-md'
-          src={activeResume}
-          frameBorder={0}
-          title='Candidate Resume'
-        ></iframe>
-
-        {/* Optional overlay when loading */}
-        {/* <div className="absolute inset-0 flex items-center justify-center bg-white/70">
-          <Loader2 className="animate-spin text-gray-400 w-6 h-6" />
-        </div> */}
+        {renderPreview()}
       </div>
     </div>
   );
+};
+
+// Component for loading and displaying text files
+const TextFileViewer = ({ url }: { url: string }) => {
+  const [content, setContent] = useState<string>('Loading...');
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    fetch(url, { signal: controller.signal })
+      .then((res) => res.text())
+      .then(setContent)
+      .catch(() => setContent('Unable to load text content.'));
+
+    return () => controller.abort();
+  }, [url]);
+
+  return <pre>{content}</pre>;
 };
 
 export default ResumePreview;
