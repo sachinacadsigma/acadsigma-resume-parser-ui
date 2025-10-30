@@ -32,7 +32,6 @@ const UploadJD: React.FC = () => {
     resetJD,
     markJDProcessed,
   } = useJD();
-
   const { credits_remaining, credits, name, email } = useUser();
 
   const [mode, setMode] = useState<'file' | 'text'>('file');

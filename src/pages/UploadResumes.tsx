@@ -16,7 +16,7 @@ const UploadResumes: React.FC = () => {
   const { email } = useUser();
   const { saveResults } = useMatch();
   const navigate = useNavigate();
-  const { jdFile, jdText } = useJD();
+  const { jdFile, jdText, skills } = useJD();
   const [files, setFiles] = useState<File[]>([]);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -65,6 +65,8 @@ const UploadResumes: React.FC = () => {
         const formData = new FormData();
         formData.append('questions_enabled', 'True');
         formData.append('github_enabled', 'True');
+        formData.append('edited_must_have', skills.mustHaveSkills.toString());
+        formData.append('edited_preferred', skills.niceToHaveSkills.toString());
         if (jdFile) {
           formData.append('jd_file', jdFile);
         } else if (jdText.trim().length > 0) {
