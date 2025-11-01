@@ -84,6 +84,10 @@ const UploadJD: React.FC = () => {
       });
 
       if (res.status === 200) {
+        console.log('skilss:', {
+          mustHave: res.data.must_have_skills,
+          niceToHave: res.data.nice_to_have_skills,
+        });
         saveSkills({
           mustHave: res.data.must_have_skills,
           niceToHave: res.data.nice_to_have_skills,
@@ -272,13 +276,13 @@ const UploadJD: React.FC = () => {
           {isLoading && <SkillsSkeleton />}
 
           {/* Skills Section */}
-          {skills.mustHaveSkills.length > 0 &&
-            skills.niceToHaveSkills.length > 0 && (
-              <SkillsSection
-                mustHave={skills.mustHaveSkills}
-                niceToHave={skills.niceToHaveSkills}
-              />
-            )}
+          {(skills.mustHaveSkills.length > 0 ||
+            skills.niceToHaveSkills.length > 0) && (
+            <SkillsSection
+              mustHave={skills.mustHaveSkills}
+              niceToHave={skills.niceToHaveSkills}
+            />
+          )}
 
           {/* Next & Save Button */}
           {isJDProcessed && !isLoading && (

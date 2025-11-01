@@ -78,6 +78,12 @@ const SkillsSection: React.FC<Props> = ({ mustHave, niceToHave }) => {
         </div>
 
         <div className='flex flex-wrap gap-2'>
+          {localMust.length === 0 && !editMustMode && (
+            <span className='text-gray-500 text-sm italic'>
+              No skills added yet
+            </span>
+          )}
+
           {localMust.map((skill) => (
             <span
               key={skill}
@@ -145,6 +151,11 @@ const SkillsSection: React.FC<Props> = ({ mustHave, niceToHave }) => {
         </div>
 
         <div className='flex flex-wrap gap-2'>
+          {localNice.length === 0 && !editNiceMode && (
+            <span className='text-gray-500 text-sm italic'>
+              No skills added yet
+            </span>
+          )}
           {localNice.map((skill) => (
             <span
               key={skill}
