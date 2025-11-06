@@ -69,14 +69,16 @@ const Plans: React.FC = () => {
       // 2. Configure Razorpay checkout
       const options = {
         key: razorpay_key_id,
-        amount: order.amount,
+        amount: order.amount * 100,
         currency: order.currency,
         name: 'HiringNodes',
         description: `${plan.name} Plan`,
         order_id: order.id,
         handler: function (response: any) {
-          toast.success(`Payment Successful for ${plan.name} 🎉`);
-          console.log('Payment response:', response);
+          if (response?.razorpay_payment_id) {
+            toast.success(`Payment Successful for ${plan.name} 🎉`);
+            console.log('Payment response:', response);
+          }
         },
         prefill: {
           name,
