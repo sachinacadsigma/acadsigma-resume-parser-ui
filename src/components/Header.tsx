@@ -1,5 +1,4 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { API_URL, GOOGLE_AUTH_URL } from '../utils/constants';
 import { useAuth } from '../redux/hooks/useAuth';
 import { useUser } from '../redux/hooks/useUser';
 import Logo from './Logo';
@@ -29,10 +28,6 @@ const Header = () => {
 
   const isAdmin = role === 'admin';
 
-  const handleLogin = () => {
-    window.location.href = GOOGLE_AUTH_URL ?? `${API_URL}/auth/google`;
-  };
-
   const handleLogout = () => {
     logout();
     removeUser();
@@ -50,12 +45,10 @@ const Header = () => {
         <Link to={isAuthenticated ? 'upload-jd' : '/'}>
           <Logo />
         </Link>
-
-        {/* Center Title */}
+        {/* Center Title
         <h1 className='absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 text-2xl font-semibold text-white md:block'>
           A U R A
-        </h1>
-
+        </h1> */}
         {/* Navigation */}
         <nav className='flex items-center gap-3 text-white md:gap-6'>
           {isAuthenticated ? (
@@ -77,14 +70,10 @@ const Header = () => {
               </button>
             </div>
           ) : (
-            <button
-              onClick={handleLogin}
-              className={navItemClasses}
-              title='Login'
-            >
+            <Link to='/login' className={navItemClasses}>
               <LogIn size={18} />
               <span className='hidden md:block'>Login</span>
-            </button>
+            </Link>
           )}
 
           {name && (

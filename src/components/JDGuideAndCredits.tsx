@@ -1,6 +1,6 @@
 import React from 'react';
-import { Info, CircleStar, ExternalLink } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Info, CircleStar } from 'lucide-react';
+// import { Link } from 'react-router-dom';
 
 interface Props {
   credits: number | null;
@@ -24,9 +24,9 @@ const JDGuideAndCredits: React.FC<Props> = ({
 
       <button className='text-xs my-2 text-gray-500 flex items-center gap-2'>
         <CircleStar size={16} /> {creditsRemaining}/{credits} Tokens Left •
-        <Link to='/plans' className='flex gap-0.5 items-center text-secondary'>
+        {/* <Link to='/plans' className='flex gap-0.5 items-center text-secondary'>
           Buy <ExternalLink size={12} />
-        </Link>
+        </Link> */}
       </button>
     </div>
   );

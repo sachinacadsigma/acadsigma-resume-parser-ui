@@ -15,6 +15,9 @@ import EmailLogs from '../pages/settings/EmailLogs';
 import Payments from '../pages/settings/Payments';
 import Chats from '../pages/Chats';
 import Files from '../pages/Files';
+import Login from '../pages/Login';
+import ForgotPassword from '../pages/ForgetPassword';
+import ResetPassword from '../pages/ResetPassword';
 
 const router = createBrowserRouter([
   {
@@ -22,6 +25,9 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { index: true, element: <Welcome /> },
+      { path: 'login', element: <Login /> },
+      { path: 'forgot-password', element: <ForgotPassword /> },
+      { path: 'reset-password', element: <ResetPassword /> },
       {
         element: <PrivateRoute />,
         children: [

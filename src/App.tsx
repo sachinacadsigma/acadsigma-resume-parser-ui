@@ -13,6 +13,10 @@ function App() {
   const { storeUser } = useUser();
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const hideNavbar =
+    pathname.includes('login') ||
+    pathname.includes('forgot-password') ||
+    pathname.includes('reset-password');
 
   useEffect(() => {
     if (theme === 'dark') {
@@ -45,8 +49,6 @@ function App() {
       toast.error('Token is expired!');
       logout();
       navigate('/');
-    } else {
-      console.log('No token found');
     }
   }, [token]);
 
@@ -56,7 +58,7 @@ function App() {
 
   return (
     <div className='bg-custom'>
-      <Header />
+      {hideNavbar ? null : <Header />}
       <Outlet />
       <Toaster position='bottom-center' />
     </div>

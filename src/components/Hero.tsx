@@ -17,7 +17,7 @@ const Hero = () => {
   };
 
   return (
-    <main className='flex-grow bg-primary  flex items-center justify-center'>
+    <main className='flex-grow bg-primary py-16 flex items-center justify-center'>
       <div className='text-center max-w-4xl p-8'>
         <h2 className='text-5xl bg-gradient-to-tr from-[#92F32A] via-[#11b080] to-[#2191BE] bg-clip-text text-transparent md:text-6xl font-extrabold mb-8'>
           Find the Right Candidate, <br /> Faster
