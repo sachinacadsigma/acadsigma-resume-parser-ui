@@ -1,11 +1,11 @@
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import Hero from '../components/Hero';
 import { useEffect } from 'react';
 import { useAuth } from '../redux/hooks/useAuth';
 import Footer from '../components/Footer';
 
 const Welcome = () => {
-  const { pathname } = useLocation();
+  // const { pathname } = useLocation();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -13,7 +13,7 @@ const Welcome = () => {
   useEffect(() => {
     let token = searchParams.get('token');
 
-    if (token && !pathname.includes('reset-password')) {
+    if (token) {
       if (token.includes('token=')) {
         token = token.split('token=')[1];
       }

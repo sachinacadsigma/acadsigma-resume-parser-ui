@@ -18,6 +18,7 @@ import Files from '../pages/Files';
 import Login from '../pages/Login';
 import ForgotPassword from '../pages/ForgetPassword';
 import ResetPassword from '../pages/ResetPassword';
+import Signup from '../pages/Signup';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Welcome /> },
       { path: 'login', element: <Login /> },
+      { path: 'signup', element: <Signup /> },
       { path: 'forgot-password', element: <ForgotPassword /> },
       { path: 'reset-password', element: <ResetPassword /> },
       {

@@ -15,6 +15,7 @@ function App() {
   const navigate = useNavigate();
   const hideNavbar =
     pathname.includes('login') ||
+    pathname.includes('signup') ||
     pathname.includes('forgot-password') ||
     pathname.includes('reset-password');
 
